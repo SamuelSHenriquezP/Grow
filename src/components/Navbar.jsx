@@ -8,9 +8,9 @@ export const Navbar = ({ cartCount, onOpenCart, onOpenQuiz }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 40);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -25,13 +25,15 @@ export const Navbar = ({ cartCount, onOpenCart, onOpenQuiz }) => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 lg:px-12 py-4 flex justify-center">
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 lg:px-12 py-4 flex justify-center transition-all duration-500 ease-out ${
+        scrolled 
+          ? 'opacity-100 translate-y-0 pointer-events-auto' 
+          : 'opacity-0 -translate-y-12 pointer-events-none'
+      }`}
+    >
       <div 
-        className={`w-full max-w-7xl mx-auto rounded-pill transition-all duration-500 px-6 sm:px-10 py-3 flex items-center justify-between gap-4 ${
-          scrolled 
-            ? 'glass-panel shadow-xl bg-[#F9F7F2]/95 border border-[#D9AE94]/40' 
-            : 'bg-[#F9F7F2]/85 backdrop-blur-md border border-[#5D3A24]/10 shadow-sm'
-        }`}
+        className="w-full max-w-7xl mx-auto rounded-pill px-6 sm:px-10 py-3 flex items-center justify-between gap-4 glass-panel shadow-xl bg-[#F9F7F2]/90 backdrop-blur-md border border-[#D9AE94]/40 transition-all duration-300"
       >
         {/* Left Navigation Links */}
         <nav className="hidden lg:flex items-center gap-8 text-[11px] font-sans tracking-[0.3em] uppercase text-[#5D3A24]">

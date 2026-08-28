@@ -1,8 +1,8 @@
 import React from 'react';
 
-export const BrandLogo = ({ variant = 'dark', size = 'medium', className = '' }) => {
+export const BrandLogo = ({ variant = 'dark', size = 'medium', align = 'center', className = '' }) => {
   const isLight = variant === 'light';
-  const textColor = isLight ? '#F9F7F2' : '#5D3A24';
+  const textColor = isLight ? '#FFFDF9' : '#5D3A24';
   const sparkleColor = isLight ? '#D9AE94' : '#5D3A24';
 
   const titleSize = size === 'large' 
@@ -17,10 +17,12 @@ export const BrandLogo = ({ variant = 'dark', size = 'medium', className = '' })
     ? 'text-[8px] tracking-[0.35em]' 
     : 'text-[9px] md:text-[11px] tracking-[0.45em]';
 
+  const alignmentClasses = align === 'left' ? 'items-start text-left' : 'items-center text-center';
+
   return (
-    <div className={`inline-flex flex-col items-center justify-center text-center select-none ${className}`}>
+    <div className={`inline-flex flex-col justify-center select-none ${alignmentClasses} ${className}`}>
       {/* Main GROW Typography with Sparkle in 'O' */}
-      <div className={`flex items-center text-center justify-center tracking-[0.25em] ${titleSize}`} style={{ color: textColor }}>
+      <div className={`flex items-center tracking-[0.25em] ${titleSize}`} style={{ color: textColor }}>
         <span className="font-serif font-light">G</span>
         <span className="font-serif font-light">R</span>
         
@@ -43,8 +45,8 @@ export const BrandLogo = ({ variant = 'dark', size = 'medium', className = '' })
 
       {/* Subtitle BY JOHANÍA BALLESTAS */}
       <span 
-        className={`font-sans uppercase mt-1 font-light text-center whitespace-nowrap ${subtitleSize}`}
-        style={{ color: isLight ? 'rgba(249, 247, 242, 0.85)' : '#5D3A24' }}
+        className={`font-sans uppercase mt-0.5 font-light whitespace-nowrap ${subtitleSize}`}
+        style={{ color: isLight ? 'rgba(255, 253, 249, 0.9)' : '#5D3A24' }}
       >
         BY JOHANÍA BALLESTAS
       </span>
