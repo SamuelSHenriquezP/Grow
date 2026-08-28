@@ -26,14 +26,14 @@ export const Navbar = ({ cartCount, onOpenCart, onOpenQuiz }) => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 lg:px-12 py-4 flex justify-center transition-all duration-500 ease-out ${
-        scrolled 
+      className={`fixed top-0 left-0 right-0 z-50 px-3 sm:px-8 lg:px-12 py-3 sm:py-4 flex flex-col items-center transition-all duration-500 ease-out ${
+        scrolled || mobileMenuOpen
           ? 'opacity-100 translate-y-0 pointer-events-auto' 
           : 'opacity-0 -translate-y-12 pointer-events-none'
       }`}
     >
       <div 
-        className="w-full max-w-7xl mx-auto rounded-pill px-6 sm:px-10 py-3 flex items-center justify-between gap-4 glass-panel shadow-xl bg-[#F9F7F2]/90 backdrop-blur-md border border-[#D9AE94]/40 transition-all duration-300"
+        className="w-full max-w-7xl mx-auto rounded-pill px-4 sm:px-10 py-3 flex items-center justify-between gap-2 sm:gap-4 glass-panel shadow-xl bg-[#F9F7F2]/90 backdrop-blur-md border border-[#D9AE94]/40 transition-all duration-300"
       >
         {/* Left Navigation Links */}
         <nav className="hidden lg:flex items-center gap-8 text-[11px] font-sans tracking-[0.3em] uppercase text-[#5D3A24]">
@@ -48,6 +48,9 @@ export const Navbar = ({ cartCount, onOpenCart, onOpenQuiz }) => {
             </a>
           ))}
         </nav>
+
+        {/* Mobile Left Spacer for visual centering of logo */}
+        <div className="w-14 lg:hidden pointer-events-none" aria-hidden="true" />
 
         {/* Centered Brand Logo */}
         <a href="#" className="flex-shrink-0 mx-auto lg:mx-0">
@@ -96,7 +99,7 @@ export const Navbar = ({ cartCount, onOpenCart, onOpenQuiz }) => {
         </div>
 
         {/* Mobile Controls */}
-        <div className="flex lg:hidden items-center gap-3">
+        <div className="flex lg:hidden items-center gap-2">
           <button
             onClick={onOpenCart}
             className="relative p-2 text-[#5D3A24]"
@@ -122,28 +125,30 @@ export const Navbar = ({ cartCount, onOpenCart, onOpenQuiz }) => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden mt-3 w-full max-w-md p-6 glass-panel rounded-organic-md flex flex-col items-center justify-center text-center gap-5 shadow-2xl bg-[#F9F7F2]/95 border border-[#D9AE94]/50">
+        <div className="lg:hidden mt-3 w-full max-w-sm sm:max-w-md p-6 glass-panel rounded-[28px] sm:rounded-[36px] flex flex-col items-center justify-center text-center gap-5 shadow-2xl bg-[#F9F7F2]/95 backdrop-blur-md border border-[#D9AE94]/50">
           <nav className="flex flex-col items-center justify-center text-center gap-4 text-xs font-sans tracking-[0.3em] uppercase text-[#5D3A24] font-medium">
             {[...leftNavLinks, ...rightNavLinks].map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-[#D9AE94] transition-colors py-1 text-center"
+                className="hover:text-[#D9AE94] transition-colors py-1 text-center text-sm tracking-[0.25em]"
               >
                 {link.name}
               </a>
             ))}
           </nav>
 
+          <div className="w-12 h-[1px] bg-[#D9AE94]/40 my-0.5" />
+
           <button
             onClick={() => {
               setMobileMenuOpen(false);
               onOpenQuiz();
             }}
-            className="w-full btn-pill-cocoa flex items-center justify-center text-center gap-2 text-xs py-3.5 tracking-[0.25em]"
+            className="w-full btn-pill-cocoa flex items-center justify-center text-center gap-2 text-xs py-3.5 tracking-[0.2em]"
           >
-            <Sparkles className="w-4 h-4 text-[#D9AE94]" />
+            <Sparkles className="w-4 h-4 text-[#D9AE94] animate-spin-slow" />
             <span>Descubrir mi Glow Match</span>
           </button>
         </div>
